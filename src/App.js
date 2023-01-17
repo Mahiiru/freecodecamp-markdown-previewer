@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import { marked } from 'marked';
+import { useState } from 'react';
+import { initialMarkedParse } from './components/initialMarkedParse';
 
 function App() {
+
+  const [text, setText] = useState(initialMarkedParse);
+  const [markdownText, setMarkdownText] = useState(marked.parse(text));
+
+  const handlerText = (event) => {
+    setText(event.target.value);
+    setMarkdownText(marked.parse(event.target.value))
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <textarea id="editor" type="text" onChange={handlerText}>{text}</textarea>
+      </div>
+      <div id="preview" dangerouslySetInnerHTML={{__html: markdownText}} />
     </div>
   );
 }
