@@ -16,10 +16,12 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <textarea id="editor" type="text" onChange={handlerText}>{text}</textarea>
+      <div class="form-outline">
+        <textarea class="form-control" id="editor" rows="4" onChange={handlerText}>{text}</textarea>
       </div>
-      <div id="preview" dangerouslySetInnerHTML={{__html: markdownText}} />
+      <div id="preview-div">
+        <div id="preview" dangerouslySetInnerHTML={{ __html: markdownText }} />
+      </div>
     </div>
   );
 }
